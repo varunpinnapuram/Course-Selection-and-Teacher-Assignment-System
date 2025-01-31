@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Selection System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 50%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #4CAF50;
+        }
+
+        label {
+            font-size: 18px;
+        }
+
+        select, button {
+            padding: 10px;
+            margin: 10px 0;
+            width: 100%;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            cursor: pointer;
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #f4f4f4;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        li:hover {
+            background-color: #e0e0e0;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Step 1: Select Semester -->
+        <div id="select-semester">
+            <h2>Select Semester</h2>
+            <label for="semester">Choose Semester:</label>
+            <select id="semester">
+                <option value="1">Semester 1</option>
+                <option value="2">Semester 2</option>
+                <option value="3">Semester 3</option>
+                <option value="4">Semester 4</option>
+            </select>
+            <button onclick="selectSemester()">Submit</button>
+        </div>
+
+        <!-- Step 2: View Courses (Hidden by Default) -->
+        <div id="view-courses" class="hidden">
+            <h2>Select 4 Courses for Semester <span id="selected-semester"></span></h2>
+            <ul id="courses-list">
+                <!-- Courses will be populated here -->
+            </ul>
+            <button onclick="submitCourses()">Submit Courses</button>
+            <button onclick="goBackToSemester()">Go Back</button>
+        </div>
+
+        <!-- Step 3: Faculty Selection (Hidden by Default) -->
+        <div id="faculty-selection" class="hidden">
+            <h2>Assign Faculty to Selected Courses</h2>
+            <ul id="faculty-list">
+                <!-- Faculty selection for courses will be here -->
+            </ul>
+            <button onclick="submitFaculty()">Submit Faculty</button>
+            <button onclick="goBackToCourses()">Go Back to Courses</button>
+        </div>
+    </div>
+
+    <script>
+        // Data for Courses and Faculty
+        const coursesData = {
+            1: ["Mathematics 101", "Physics 101", "Chemistry 101", "Biology 101", "Computer Science 101"],
+            2: ["Mathematics 201", "Physics 201", "Chemistry 201", "Biology 201", "Computer Science 201"],
+            3: ["Mathematics 301", "Physics 301", "Chemistry 301", "Biology 301", "Computer Science 301"],
+            4: ["Mathematics 401", "Physics 401", "Chemistry 401", "Biology 401", "Computer Science 401"]
+        };
+
+        const facultyData = {
+            "Mathematics": ["Dr. John Doe", "Dr. Alice Cooper"],
+            "Physics": ["Dr. Jane Smith", "Dr. Bob Anderson"],
+            "Chemistry": ["Dr. Mike Johnson", "Dr. Carla White"],
+            "Biology": ["Dr. James Brown", "Dr. Susan Green"],
+            "Computer Science": ["Dr. Emily White", "Dr. Robert Black"]
+        };
+
+        let selectedCourses = [];
+
+        // Step 1: Select Semester
+        function selectSemester() {
+            const semester = document.getElementById('semester').value;
+            document.getElementById('selected-semester').textContent = semester;
+
+            // Display the courses for the selected semester
+            const coursesList = document.getElementById('courses-list');
+            coursesList.innerHTML = "";  // Clear previous courses
+
+            const courses = coursesData[semester];
+            courses.forEach((course, index) => {
+                const li = document.createElement('li');
+                li.innerHTML = `<input type="checkbox" value="${course}" id="course-${index}"> ${course}`;
+                coursesList.appendChild(li);
+            });
+
+            // Switch to the courses view
+            document.getElementById('select-semester').classList.add('hidden');
+            document.getElementById('view-courses').classList.remove('hidden');
+        }
+
+        // Step 2: Submit Courses and View Faculty Selection
+        function submitCourses() {
+            selectedCourses = [];
+            const checkboxes = document.querySelectorAll('#courses-list input[type="checkbox"]:checked');
+
+            if (checkboxes.length !== 4) {
+                alert("Please select exactly 4 courses.");
+                return;
+            }
+
+            checkboxes.forEach(checkbox => selectedCourses.push(checkbox.value));
+
+            const facultyList = document.getElementById('faculty-list');
+            facultyList.innerHTML = "";  // Clear previous faculty list
+
+            selectedCourses.forEach(course => {
+                const facultyField = course.split(" ")[0];  // Get the subject (e.g., Mathematics)
+                const facultyOptions = facultyData[facultyField];
+                const facultySelect = document.createElement('select');
+                facultyOptions.forEach(faculty => {
+                    const option = document.createElement('option');
+                    option.value = faculty;
+                    option.textContent = faculty;
+                    facultySelect.appendChild(option);
+                });
+
+                const li = document.createElement('li');
+                li.innerHTML = `<label>${course}: </label>`;
+                li.appendChild(facultySelect);
+                facultyList.appendChild(li);
+            });
+
+            // Switch to the faculty selection view
+            document.getElementById('view-courses').classList.add('hidden');
+            document.getElementById('faculty-selection').classList.remove('hidden');
+        }
+
+        // Step 3: Submit Faculty Selection and Redirect to First Page
+        function submitFaculty() {
+            const facultySelections = document.querySelectorAll('#faculty-list select');
+            let courseFacultyMapping = [];
+
+            facultySelections.forEach((select, index) => {
+                courseFacultyMapping.push({
+                    course: selectedCourses[index],
+                    faculty: select.value
+                });
+            });
+
+            alert("Courses and Faculty Selection Submitted!");
+
+            // Redirect back to the first page (semester selection) after submission
+            window.location.href = window.location.href; // This reloads the page to go back to the first page.
+        }
+
+        // Function to go back to the semester selection
+        function goBackToSemester() {
+            document.getElementById('view-courses').classList.add('hidden');
+            document.getElementById('select-semester').classList.remove('hidden');
+        }
+
+        // Function to go back to the course list
+        function goBackToCourses() {
+            document.getElementById('faculty-selection').classList.add('hidden');
+            document.getElementById('view-courses').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>

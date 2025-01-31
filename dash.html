@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMa61m7E1f7ni4Z9N0fsoVQQH/q8WZOzUnK58cF" crossorigin="anonymous">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"> <!-- Bootstrap CSS -->
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: radial-gradient(circle, rgba(34, 193, 195, 1), rgba(253, 187, 45, 1)), url('https://images.pexels.com/photos/1604886/pexels-photo-1604886.jpeg') no-repeat center center fixed; /* Radial gradient with college image */
+            background-size: cover; /* Cover the entire background */
+            color: white;
+        }
+
+        .navbar {
+            background: rgba(0, 50, 100, 0.9); /* Darker semi-transparent background */
+        }
+
+        .icon-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            transition: transform 0.3s, background 0.3s;
+            text-align: center; /* Center-align icon and text */
+            cursor: pointer; /* Change cursor to pointer */
+        }
+
+        .icon-card:hover {
+            transform: scale(1.05); /* Enlarge icon on hover */
+            background: rgba(255, 255, 255, 0.2); /* Slight background change on hover */
+        }
+
+        .icon {
+            width: 80px; /* Adjust width for larger icons */
+            height: 80px; /* Adjust height for larger icons */
+        }
+
+        .icon-label {
+            margin-top: 10px;
+            font-size: 18px; /* Slightly larger font size */
+        }
+
+        .name-label {
+            margin-top: 5px; /* Space between icon label and name */
+            font-size: 16px; /* Slightly larger font size for names */
+        }
+    </style>
+    <script>
+        function redirectToLogin(role) {
+            if (role === "student") {
+                window.location.href = "stu.html"; // Redirect to Student Login
+            } else if (role === "faculty") {
+                window.location.href = "faculty.html"; // Redirect to Faculty Login
+            } else if (role === "administrator") {
+                window.location.href = "admin.html"; // Redirect to Administrator Login
+            }
+        }
+    </script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <h1 class="navbar-brand">Course Selection and Teacher Assignment System</h1>
+        </div>
+    </nav>
+    <div class="container text-center">
+        <h1 class="my-5">LOGIN AS</h1>
+        <div class="row justify-content-center">
+            <div class="col-md-3 mb-4">
+                <div class="icon-card p-3" onclick="redirectToLogin('student')">
+                    <img src="https://img.icons8.com/ios-filled/80/000000/student-female.png" alt="Student Icon" class="icon"> <!-- Larger icon -->
+                    <div class="icon-label">Student Login</div>
+                    <div class="name-label">Students</div> <!-- Name label for Student -->
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="icon-card p-3" onclick="redirectToLogin('faculty')">
+                    <img src="https://img.icons8.com/ios-filled/80/000000/teacher.png" alt="Faculty Icon" class="icon"> <!-- Larger icon -->
+                    <div class="icon-label">Faculty Login</div>
+                    <div class="name-label">Faculty</div> <!-- Name label for Faculty -->
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="icon-card p-3" onclick="redirectToLogin('administrator')">
+                    <img src="https://img.icons8.com/ios-filled/80/000000/administrator-male.png" alt="Admin Icon" class="icon"> <!-- Larger icon -->
+                    <div class="icon-label">Admin Login</div>
+                    <div class="name-label">Administrators</div> <!-- Name label for Admin -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> <!-- Bootstrap JS -->
+</body>
+</html>

@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Selection and Teacher Assignment System</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: radial-gradient(circle, rgba(34, 193, 195, 0.7), rgba(253, 187, 45, 0.7)),
+                        url('https://images.pexels.com/photos/1604886/pexels-photo-1604886.jpeg') no-repeat center center fixed;
+            background-size: cover;
+            color: #333; /* Text color for better visibility */
+        }
+
+        header {
+            text-align: center;
+            padding: 20px;
+            color: #007BFF; /* Headline color */
+        }
+
+        main {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9); /* Slightly transparent background */
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Enhanced shadow for depth */
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        select, input, textarea {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s; /* Smooth transition for button */
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        .teacher-profile {
+            margin-bottom: 15px;
+        }
+
+        .teacher-name {
+            cursor: pointer;
+            color: #007BFF;
+        }
+
+        .teacher-name:hover {
+            text-decoration: underline;
+        }
+
+        .profile-details {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 5px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .faculty-selection {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>University Course Selection System</h1>
+    </header>
+
+    <main>
+        <!-- Semester Selection Section -->
+        <section id="semester-selection">
+            <h2>Select Your Semester</h2>
+            <label for="semester">Choose Semester:</label>
+            <select id="semester" required>
+                <option value="semester-1">Semester 1</option>
+                <option value="semester-2">Semester 2</option>
+                <option value="semester-3">Semester 3</option>
+                <option value="semester-4">Semester 4</option>
+                <option value="semester-5">Semester 5</option>
+                <option value="semester-6">Semester 6</option>
+                <option value="semester-7">Semester 7</option>
+                <option value="semester-8">Semester 8</option>
+            </select>
+        </section>
+
+        <!-- Course Selection Section -->
+        <section id="course-selection">
+            <h2>Select Your Courses</h2>
+            <form id="selection-form">
+                <div>
+                    <h3>Theory Courses</h3>
+                    <label for="theory-course-1">Course 1:</label>
+                    <select id="theory-course-1" required>
+                        <option value="CS101">CS101 - Introduction to Computer Science</option>
+                        <option value="MATH101">MATH101 - Calculus I</option>
+                        <option value="PHY101">PHY101 - Physics I</option>
+                        <option value="BIO101">BIO101 - Biology I</option>
+                    </select>
+                    <div class="faculty-selection" id="faculty-1"></div>
+
+                    <label for="theory-course-2">Course 2:</label>
+                    <select id="theory-course-2" required>
+                        <option value="CS102">CS102 - Data Structures</option>
+                        <option value="MATH102">MATH102 - Linear Algebra</option>
+                        <option value="PHY102">PHY102 - Physics II</option>
+                        <option value="BIO102">BIO102 - Biology II</option>
+                    </select>
+                    <div class="faculty-selection" id="faculty-2"></div>
+
+                    <label for="theory-course-3">Course 3:</label>
+                    <select id="theory-course-3" required>
+                        <option value="CS201">CS201 - Algorithms</option>
+                        <option value="MATH201">MATH201 - Differential Equations</option>
+                        <option value="PHY201">PHY201 - Classical Mechanics</option>
+                        <option value="BIO201">BIO201 - Genetics</option>
+                    </select>
+                    <div class="faculty-selection" id="faculty-3"></div>
+
+                    <label for="theory-course-4">Course 4:</label>
+                    <select id="theory-course-4" required>
+                        <option value="CS202">CS202 - Web Development</option>
+                        <option value="MATH202">MATH202 - Probability and Statistics</option>
+                        <option value="PHY202">PHY202 - Thermodynamics</option>
+                        <option value="BIO202">BIO202 - Microbiology</option>
+                    </select>
+                    <div class="faculty-selection" id="faculty-4"></div>
+                </div>
+
+                <div>
+                    <h3>Lab Courses</h3>
+                    <label for="lab-course-1">Course 1:</label>
+                    <select id="lab-course-1" required>
+                        <option value="CS-LAB">CS Lab - Computer Science Lab</option>
+                        <option value="PHY-LAB">Physics Lab</option>
+                        <option value="CHEM-LAB">Chemistry Lab</option>
+                        <option value="BIO-LAB">Biology Lab</option>
+                    </select>
+                    <div class="faculty-selection" id="faculty-5"></div>
+
+                    <label for="lab-course-2">Course 2:</label>
+                    <select id="lab-course-2" required>
+                        <option value="CS-LAB-2">CS Lab II</option>
+                        <option value="PHY-LAB-2">Physics Lab II</option>
+                        <option value="CHEM-LAB-2">Chemistry Lab II</option>
+                        <option value="BIO-LAB-2">Biology Lab II</option>
+                    </select>
+                    <div class="faculty-selection" id="faculty-6"></div>
+                </div>
+
+                <button type="submit">Submit Course Selection</button>
+            </form>
+        </section>
+
+        <!-- Teacher Profiles Section -->
+<section id="teacher-profiles">
+    <h2>Teacher Profiles</h2>
+    <div id="profile-list">
+        <div class="teacher-profile">
+            <h3 class="teacher-name" data-id="profile-1">Dr. John Smith</h3>
+            <div id="profile-1" class="profile-details hidden">
+                <p><strong>Department:</strong> Computer Science</p>
+                <p><strong>Ratings:</strong> 4.5/5</p>
+                <p><strong>Research Projects:</strong> AI and Machine Learning</p>
+                <p><strong>Patents:</strong> 3 patents in AI</p>
+                <p><strong>Academic Background:</strong> PhD in Computer Science from XYZ University</p>
+            </div>
+        </div>
+        <div class="teacher-profile">
+            <h3 class="teacher-name" data-id="profile-2">Dr. Jane Doe</h3>
+            <div id="profile-2" class="profile-details hidden">
+                <p><strong>Department:</strong> Mathematics</p>
+                <p><strong>Ratings:</strong> 4.7/5</p>
+                <p><strong>Research Projects:</strong> Statistical Analysis</p>
+                <p><strong>Patents:</strong> 2 patents in Data Science</p>
+                <p><strong>Academic Background:</strong> PhD in Mathematics from ABC University</p>
+            </div>
+        </div>
+        <div class="teacher-profile">
+            <h3 class="teacher-name" data-id="profile-3">Dr. Alice Johnson</h3>
+            <div id="profile-3" class="profile-details hidden">
+                <p><strong>Department:</strong> Physics</p>
+                <p><strong>Ratings:</strong> 4.6/5</p>
+                <p><strong>Research Projects:</strong> Quantum Mechanics</p>
+                <p><strong>Patents:</strong> 1 patent in Photonics</p>
+                <p><strong>Academic Background:</strong> PhD in Physics from DEF University</p>
+            </div>
+        </div>
+        <div class="teacher-profile">
+            <h3 class="teacher-name" data-id="profile-4">Dr. Bob Brown</h3>
+            <div id="profile-4" class="profile-details hidden">
+                <p><strong>Department:</strong> Biology</p>
+                <p><strong>Ratings:</strong> 4.8/5</p>
+                <p><strong>Research Projects:</strong> Genetic Engineering</p>
+                <p><strong>Patents:</strong> 4 patents in Biotechnology</p>
+                <p><strong>Academic Background:</strong> PhD in Biology from GHI University</p>
+            </div>
+        </div>
+        <div class="teacher-profile">
+            <h3 class="teacher-name" data-id="profile-5">Dr. Charlie White</h3>
+            <div id="profile-5" class="profile-details hidden">
+                <p><strong>Department:</strong> Chemistry</p>
+                <p><strong>Ratings:</strong> 4.2/5</p>
+                <p><strong>Research Projects:</strong> Organic Chemistry</p>
+                <p><strong>Patents:</strong> 2 patents in Chemical Synthesis</p>
+                <p><strong>Academic Background:</strong> PhD in Chemistry from JKL University</p>
+            </div>
+        </div>
+        <div class="teacher-profile">
+            <h3 class="teacher-name" data-id="profile-6">Dr. David Black</h3>
+            <div id="profile-6" class="profile-details hidden">
+                <p><strong>Department:</strong> Computer Science</p>
+                <p><strong>Ratings:</strong> 4.3/5</p>
+                <p><strong>Research Projects:</strong> Cybersecurity</p>
+                <p><strong>Patents:</strong> 5 patents in Network Security</p>
+                <p><strong>Academic Background:</strong> PhD in Computer Science from MNO University</p>
+            </div>
+        </div>
+        <div class="teacher-profile">
+            <h3 class="teacher-name" data-id="profile-7">Dr. Eva Green</h3>
+            <div id="profile-7" class="profile-details hidden">
+                <p><strong>Department:</strong> Mathematics</p>
+                <p><strong>Ratings:</strong> 4.9/5</p>
+                <p><strong>Research Projects:</strong> Applied Mathematics</p>
+                <p><strong>Patents:</strong> 1 patent in Mathematical Models</p>
+                <p><strong>Academic Background:</strong> PhD in Mathematics from PQR University</p>
+            </div>
+        </div>
+        <div class="teacher-profile">
+            <h3 class="teacher-name" data-id="profile-8">Dr. Frank Blue</h3>
+            <div id="profile-8" class="profile-details hidden">
+                <p><strong>Department:</strong> Physics</p>
+                <p><strong>Ratings:</strong> 4.1/5</p>
+                <p><strong>Research Projects:</strong> Astrophysics</p>
+                <p><strong>Patents:</strong> 0 patents</p>
+                <p><strong>Academic Background:</strong> PhD in Physics from STU University</p>
+            </div>
+        </div>
+        <div class="teacher-profile">
+            <h3 class="teacher-name" data-id="profile-9">Dr. Grace Red</h3>
+            <div id="profile-9" class="profile-details hidden">
+                <p><strong>Department:</strong> Biology</p>
+                <p><strong>Ratings:</strong> 4.4/5</p>
+                <p><strong>Research Projects:</strong> Microbiology</p>
+                <p><strong>Patents:</strong> 1 patent in Microbial Processes</p>
+                <p><strong>Academic Background:</strong> PhD in Biology from VWX University</p>
+            </div>
+        </div>
+        <div class="teacher-profile">
+            <h3 class="teacher-name" data-id="profile-10">Dr. Henry Orange</h3>
+            <div id="profile-10" class="profile-details hidden">
+                <p><strong>Department:</strong> Chemistry</p>
+                <p><strong>Ratings:</strong> 4.6/5</p>
+                <p><strong>Research Projects:</strong> Inorganic Chemistry</p>
+                <p><strong>Patents:</strong> 2 patents in Material Science</p>
+                <p><strong>Academic Background:</strong> PhD in Chemistry from YZA University</p>
+            </div>
+        </div>
+        <div class="teacher-profile">
+            <h3 class="teacher-name" data-id="profile-11">Dr. Ivy Purple</h3>
+            <div id="profile-11" class="profile-details hidden">
+                <p><strong>Department:</strong> Computer Science</p>
+                <p><strong>Ratings:</strong> 4.5/5</p>
+                <p><strong>Research Projects:</strong> Human-Computer Interaction</p>
+                <p><strong>Patents:</strong> 3 patents in UI/UX Design</p>
+                <p><strong>Academic Background:</strong> PhD in Computer Science from ABC University</p>
+            </div>
+        </div>
+        <div class="teacher-profile">
+            <h3 class="teacher-name" data-id="profile-12">Dr. Jack Yellow</h3>
+            <div id="profile-12" class="profile-details hidden">
+                <p><strong>Department:</strong> Mathematics</p>
+                <p><strong>Ratings:</strong> 4.2/5</p>
+                <p><strong>Research Projects:</strong> Numerical Analysis</p>
+                <p><strong>Patents:</strong> 1 patent in Computational Methods</p>
+                <p><strong>Academic Background:</strong> PhD in Mathematics from DEF University</p>
+            </div>
+        </div>
+        <div class="teacher-profile">
+            <h3 class="teacher-name" data-id="profile-13">Dr. Kate Cyan</h3>
+            <div id="profile-13" class="profile-details hidden">
+                <p><strong>Department:</strong> Physics</p>
+                <p><strong>Ratings:</strong> 4.4/5</p>
+                <p><strong>Research Projects:</strong> Fluid Dynamics</p>
+                <p><strong>Patents:</strong> 0 patents</p>
+                <p><strong>Academic Background:</strong> PhD in Physics from GHI University</p>
+            </div>
+        </div>
+        <div class="teacher-profile">
+            <h3 class="teacher-name" data-id="profile-14">Dr. Liam Magenta</h3>
+            <div id="profile-14" class="profile-details hidden">
+                <p><strong>Department:</strong> Biology</p>
+                <p><strong>Ratings:</strong> 4.7/5</p>
+                <p><strong>Research Projects:</strong> Biochemistry</p>
+                <p><strong>Patents:</strong> 2 patents in Bioengineering</p>
+                <p><strong>Academic Background:</strong> PhD in Biology from JKL University</p>
+            </div>
+        </div>
+        <div class="teacher-profile">
+            <h3 class="teacher-name" data-id="profile-15">Dr. Mia Teal</h3>
+            <div id="profile-15" class="profile-details hidden">
+                <p><strong>Department:</strong> Chemistry</p>
+                <p><strong>Ratings:</strong> 4.3/5</p>
+                <p><strong>Research Projects:</strong> Chemical Engineering</p>
+                <p><strong>Patents:</strong> 1 patent in Green Chemistry</p>
+                <p><strong>Academic Background:</strong> PhD in Chemistry from MNO University</p>
+            </div>
+        </div>
+        <div class="teacher-profile">
+            <h3 class="teacher-name" data-id="profile-16">Dr. Noah Navy</h3>
+            <div id="profile-16" class="profile-details hidden">
+                <p><strong>Department:</strong> Computer Science</p>
+                <p><strong>Ratings:</strong> 4.1/5</p>
+                <p><strong>Research Projects:</strong> Software Engineering</p>
+                <p><strong>Patents:</strong> 0 patents</p>
+                <p><strong>Academic Background:</strong> PhD in Computer Science from STU University</p>
+            </div>
+        </div>
+        <div class="teacher-profile">
+            <h3 class="teacher-name" data-id="profile-17">Dr. Olivia Silver</h3>
+            <div id="profile-17" class="profile-details hidden">
+                <p><strong>Department:</strong> Mathematics</p>
+                <p><strong>Ratings:</strong> 4.6/5</p>
+                <p><strong>Research Projects:</strong> Optimization</p>
+                <p><strong>Patents:</strong> 1 patent in Decision Science</p>
+                <p><strong>Academic Background:</strong> PhD in Mathematics from YZA University</p>
+            </div>
+        </div>
+        <div class="teacher-profile">
+            <h3 class="teacher-name" data-id="profile-18">Dr. Paul Gold</h3>
+            <div id="profile-18" class="profile-details hidden">
+                <p><strong>Department:</strong> Physics</p>
+                <p><strong>Ratings:</strong> 4.0/5</p>
+                <p><strong>Research Projects:</strong> Materials Science</p>
+                <p><strong>Patents:</strong> 0 patents</p>
+                <p><strong>Academic Background:</strong> PhD in Physics from ABC University</p>
+            </div>
+        </div>
+        <div class="teacher-profile">
+            <h3 class="teacher-name" data-id="profile-19">Dr. Quinn Bronze</h3>
+            <div id="profile-19" class="profile-details hidden">
+                <p><strong>Department:</strong> Biology</p>
+                <p><strong>Ratings:</strong> 4.8/5</p>
+                <p><strong>Research Projects:</strong> Environmental Biology</p>
+                <p><strong>Patents:</strong> 3 patents in Conservation</p>
+                <p><strong>Academic Background:</strong> PhD in Biology from DEF University</p>
+            </div>
+        </div>
+        <div class="teacher-profile">
+            <h3 class="teacher-name" data-id="profile-20">Dr. Rachel Pink</h3>
+            <div id="profile-20" class="profile-details hidden">
+                <p><strong>Department:</strong> Chemistry</p>
+                <p><strong>Ratings:</strong> 4.3/5</p>
+                <p><strong>Research Projects:</strong> Chemical Biology</p>
+                <p><strong>Patents:</strong> 2 patents in Drug Development</p>
+                <p><strong>Academic Background:</strong> PhD in Chemistry from GHI University</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+        <!-- Feedback Section -->
+        <section id="feedback">
+            <h2>Feedback on Teachers</h2>
+            <form id="feedback-form">
+                <label for="teacher-name">Teacher Name:</label>
+                <input type="text" id="teacher-name" required>
+
+                <label for="feedback-comments">Your Feedback:</label>
+                <textarea id="feedback-comments" required></textarea>
+
+                <button type="submit">Submit Feedback</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 University Course Selection System</p>
+    </footer>
+
+    <script>
+        
+        // Faculty list for each course
+        const faculties = [
+            "Dr. John Smith", "Dr. Jane Doe", "Dr. Alice Johnson", "Dr. Bob Brown",
+            "Dr. Charlie White", "Dr. David Black", "Dr. Eva Green", "Dr. Frank Blue",
+            "Dr. Grace Red", "Dr. Henry Orange", "Dr. Ivy Purple", "Dr. Jack Yellow",
+            "Dr. Kate Cyan", "Dr. Liam Magenta", "Dr. Mia Teal", "Dr. Noah Navy",
+            "Dr. Olivia Silver", "Dr. Paul Gold", "Dr. Quinn Bronze", "Dr. Rachel Pink"
+        ];
+
+        // Function to populate faculty dropdown based on course selection
+        function populateFaculty(courseSelectId, facultyDivId) {
+            const courseSelect = document.getElementById(courseSelectId);
+            const facultyDiv = document.getElementById(facultyDivId);
+            const facultySelect = document.createElement('select');
+            facultySelect.required = true;
+            facultySelect.innerHTML = "<option value=''>Select Faculty</option>";
+
+            // Populate the faculty options
+            faculties.forEach(faculty => {
+                const option = document.createElement('option');
+                option.value = faculty;
+                option.textContent = faculty;
+                facultySelect.appendChild(option);
+            });
+
+            // Clear existing faculty options and append the new select
+            facultyDiv.innerHTML = ""; // Clear existing contents
+            facultyDiv.appendChild(facultySelect);
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const teacherNames = document.querySelectorAll(".teacher-name");
+            teacherNames.forEach(function(teacher) {
+                teacher.addEventListener("click", function() {
+                    const profileId = this.getAttribute("data-id");
+                    const profile = document.getElementById(profileId);
+                    if (profile.classList.contains("hidden")) {
+                        profile.classList.remove("hidden");
+                    } else {
+                        profile.classList.add("hidden");
+                    }
+                });
+            });
+
+            // Populate faculty dropdowns when courses are selected
+            document.querySelectorAll('select[id^="theory-course"], select[id^="lab-course"]').forEach(select => {
+                select.addEventListener("change", function() {
+                    const courseId = this.id;
+                    const facultyDivId = "faculty-" + courseId.split('-').pop(); // Get corresponding faculty div id
+                    populateFaculty(courseId, facultyDivId);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

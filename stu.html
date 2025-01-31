@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Login</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            background: radial-gradient(circle, rgba(34, 193, 195, 0.7), rgba(253, 187, 45, 0.7)), 
+                        url('https://images.pexels.com/photos/1604886/pexels-photo-1604886.jpeg') no-repeat center center fixed;
+            background-size: cover; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            color: #333; /* Text color for better visibility */
+        }
+
+        .login-container { 
+            background: rgba(255, 255, 255, 0.9); /* Slightly transparent background */
+            padding: 20px; 
+            border-radius: 8px; 
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Enhanced shadow for depth */
+            width: 300px; /* Fixed width for the login box */
+        }
+
+        h2 { 
+            margin-bottom: 20px; 
+            text-align: center; /* Centered heading */
+            color: #007BFF; /* Headline color */
+        }
+
+        input { 
+            width: 90%; 
+            padding: 10px; 
+            margin: 10px 0; 
+            border: 1px solid #ccc; 
+            border-radius: 4px; 
+        }
+
+        input .sai{ 
+            width: 100%; 
+            padding: 10px; 
+            background: #007BFF; 
+            color: white; 
+            border: none; 
+            border-radius: 4px; 
+            cursor: pointer; 
+            transition: background 0.3s; 
+        }
+
+        input:hover .sai{ 
+            background: #0056b3; 
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Student Login</h2>
+        
+           
+            <form action="student_dashboard.html" method="POST">
+                <input type="text" name="username" placeholder="Username" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <!-- Use a regular button for form submission -->
+                <a href="team.html"><input type="button" value="LOGIN" class="sai"/></a>
+            </form>
+            
+
+            
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marks Assignment</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: radial-gradient(circle, #e0f7fa, #b2ebf2, #80deea, #4dd0e1, #26c6da);
+            margin: 0;
+            padding: 0;
+            display: flex; /* Use flexbox for centering */
+            align-items: center; /* Center vertically */
+            justify-content: center; /* Center horizontally */
+            height: 100vh; /* Full viewport height */
+        }
+
+        .container {
+            width: 90%; /* Responsive width */
+            max-width: 600px; /* Limit max width */
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.9); /* Slightly transparent background */
+            border-radius: 12px; /* Rounded corners */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); /* Enhanced shadow */
+            transition: box-shadow 0.3s ease, transform 0.3s ease; /* Transition effects */
+        }
+
+        .container:hover {
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25); /* Deeper shadow on hover */
+            transform: translateY(-3px); /* Lift effect on hover */
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.8em; /* Larger font size */
+        }
+
+        .student {
+            display: flex;
+            flex-direction: column;
+            margin: 15px 0;
+            padding: 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            background-color: #fafafa;
+            transition: background-color 0.2s ease;
+        }
+
+        .student:hover {
+            background-color: #f0f0f0;
+        }
+
+        .subject {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 10px 0; /* More space between subjects */
+        }
+
+        input {
+            width: 70%; /* Wider input field */
+            padding: 12px; /* Increased padding */
+            margin-right: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: border-color 0.2s ease;
+        }
+
+        input:focus {
+            border-color: #28a745;
+            outline: none;
+            box-shadow: 0 0 5px rgba(40, 167, 69, 0.5);
+        }
+
+        button {
+            padding: 10px 15px;
+            background-color: #28a745;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #218838;
+            transform: scale(1.05);
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                width: 95%; /* Adjust for smaller screens */
+            }
+        }
+
+        .reg-no-input {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .reg-no-input input {
+            flex: 1;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Marks Assignment</h2>
+        <div class="reg-no-input">
+            <input type="text" id="facultyRegNo" placeholder="Enter Student Reg No">
+            <button onclick="showStudent()">Search</button>
+        </div>
+        <div id="studentsList">
+            <!-- Students will be dynamically added here -->
+        </div>
+        <button id="submitMarks" style="display:none;" onclick="submitMarks()">Submit All Marks</button>
+    </div>
+
+    <script>
+        // Sample student data
+        const students = [
+            { id: 1, regNo: '22091A05D6', subjects: ['Mathematics', 'Physics', 'Chemistry', 'Biology'] },
+            { id: 2, regNo: '22091A05D7', subjects: ['English', 'History', 'Geography', 'Art'] },
+            { id: 3, regNo: '22091A05D8', subjects: ['Computer Science', 'Math', 'Physics', 'Physical Education'] },
+            { id: 4, regNo: '22091A05D9', subjects: ['Statistics', 'Biology', 'Chemistry', 'Music'] },
+            { id: 5, regNo: '22091A05D10', subjects: ['Data Structures', 'Algorithms', 'Discrete Mathematics', 'Software Engineering'] },
+            { id: 6, regNo: '22091A05D11', subjects: ['Web Development', 'Database Systems', 'Networking', 'Operating Systems'] },
+            { id: 7, regNo: '22091A05D12', subjects: ['Linear Algebra', 'Calculus', 'Probability', 'Mathematical Modelling'] },
+            { id: 8, regNo: '22091A05D13', subjects: ['Environmental Science', 'Microbiology', 'Genetics', 'Organic Chemistry'] },
+            { id: 9, regNo: '22091A05D14', subjects: ['Philosophy', 'Psychology', 'Sociology', 'Political Science'] },
+            { id: 10, regNo: '22091A05D15', subjects: ['Machine Learning', 'Artificial Intelligence', 'Data Mining', 'Big Data'] },
+            { id: 11, regNo: '22091A05D16', subjects: ['Digital Marketing', 'E-commerce', 'Social Media', 'SEO'] },
+            { id: 12, regNo: '22091A05D17', subjects: ['Accounting', 'Finance', 'Economics', 'Business Management'] },
+            { id: 13, regNo: '22091A05D18', subjects: ['Civil Engineering', 'Structural Analysis', 'Fluid Mechanics', 'Geotechnical Engineering'] },
+            { id: 14, regNo: '22091A05D19', subjects: ['Electrical Engineering', 'Circuit Theory', 'Electromagnetics', 'Control Systems'] },
+            { id: 15, regNo: '22091A05D20', subjects: ['Mechanical Engineering', 'Thermodynamics', 'Mechanics', 'Material Science'] },
+            { id: 16, regNo: '22091A05D21', subjects: ['Graphic Design', 'UI/UX Design', 'Animation', '3D Modeling'] },
+            { id: 17, regNo: '22091A05D22', subjects: ['Ethics', 'Law', 'International Relations', 'Criminology'] },
+            { id: 18, regNo: '22091A05D23', subjects: ['Fashion Design', 'Textile Science', 'Fashion Merchandising', 'Apparel Production'] },
+            { id: 19, regNo: '22091A05D24', subjects: ['Culinary Arts', 'Nutrition', 'Food Safety', 'Food Chemistry'] },
+            { id: 20, regNo: '22091A05D25', subjects: ['Journalism', 'Media Studies', 'Public Relations', 'Communication Skills'] },
+        ];
+
+        let marksEntered = false; // Track if marks have been entered
+
+        // Function to display the specific student based on Reg No entered by faculty
+        function showStudent() {
+            const regNoInput = document.getElementById('facultyRegNo').value.trim();
+            const studentsList = document.getElementById('studentsList');
+            const submitMarksButton = document.getElementById('submitMarks');
+
+            // Clear previous results
+            studentsList.innerHTML = '';
+            marksEntered = false; // Reset marks entered status
+
+            const student = students.find(s => s.regNo === regNoInput);
+            if (student) {
+                const studentDiv = document.createElement('div');
+                studentDiv.classList.add('student');
+                studentDiv.innerHTML = `<h4>Student Reg No: ${student.regNo}</h4>`;
+                student.subjects.forEach(subject => {
+                    const subjectDiv = document.createElement('div');
+                    subjectDiv.classList.add('subject');
+                    subjectDiv.innerHTML = `
+                        <span>${subject}</span>
+                        <input type="number" id="marks-${student.id}-${subject}" placeholder="Enter Marks" oninput="checkMarksEntered()">
+                        <button onclick="assignMarks('${student.regNo}', '${subject}', ${student.id})">Assign</button>
+                    `;
+                    subjectDiv.addEventListener('input', checkMarksEntered);
+                    studentDiv.appendChild(subjectDiv);
+                });
+                studentsList.appendChild(studentDiv);
+                submitMarksButton.style.display = 'block'; // Show the submit button
+            } else {
+                alert("Student not found. Please check the Registration Number.");
+            }
+        }
+
+        // Function to assign marks
+        function assignMarks(regNo, subject, studentId) {
+            const marksInput = document.getElementById(`marks-${studentId}-${subject}`);
+            const marks = marksInput.value;
+            if (marks) {
+                // Set the marks in the input field
+                marksInput.value = marks; // Keep the marks in the input
+                marksInput.disabled = true; // Disable the input field
+                marksInput.style.backgroundColor = "#e0e0e0"; // Change background color to indicate it's disabled
+                marksInput.style.color = "#6c757d"; // Change text color to indicate it's disabled
+            } else {
+                marksInput.focus(); // Focus back on the input if no marks were entered
+            }
+            checkMarksEntered(); // Check if all marks are entered
+        }
+
+        // Check if marks have been entered for all subjects
+        function checkMarksEntered() {
+            const inputs = document.querySelectorAll('input[type="number"]');
+            marksEntered = Array.from(inputs).every(input => input.value.trim() !== '' && input.disabled);
+        }
+
+        // Function to submit all marks
+        function submitMarks() {
+            if (marksEntered) {
+                alert("All marks submitted successfully!");
+                // Reset the form or perform any further actions as needed
+                document.getElementById('studentsList').innerHTML = ''; // Clear the student list
+                document.getElementById('facultyRegNo').value = ''; // Clear the Reg No input
+                document.getElementById('submitMarks').style.display = 'none'; // Hide the submit button
+            } else {
+                alert("Please enter marks for all subjects before submitting.");
+            }
+        }
+    </script>
+</body>
+</html>

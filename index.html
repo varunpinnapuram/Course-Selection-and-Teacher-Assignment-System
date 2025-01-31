@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hackathon</title>
+    <link rel="stylesheet" href="styles.css">
+    <style type="text/css">
+    /* General Styling */
+/* General Styling */
+/* Global Style Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #74ebd5, #acb6e5); /* A soft gradient background */
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 0 20px;
+}
+
+.container {
+    background-color: rgba(255, 255, 255, 0.9); /* Soft white background */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Gentle shadow for depth */
+    border-radius: 12px;
+    width: 100%;
+    max-width: 800px;
+    padding: 40px 30px;
+    text-align: center;
+}
+
+/* Heading Style */
+.heading h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Problem Statement Style */
+.problem-statement p {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    color: #555;
+    margin: 30px 0;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 20px;
+    border-left: 4px solid #74ebd5;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+/* Solution Button Style */
+.solution-btn {
+    background-color: #6a11cb;
+    color: white;
+    font-size: 1.2rem;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.solution-btn:hover {
+    background-color: #2575fc;
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .heading h1 {
+        font-size: 2.5rem;
+    }
+
+    .problem-statement p {
+        font-size: 1.1rem;
+    }
+
+    .solution-btn {
+        font-size: 1.1rem;
+        padding: 12px 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    .heading h1 {
+        font-size: 2rem;
+    }
+
+    .problem-statement p {
+        font-size: 1rem;
+        padding: 15px;
+    }
+
+    .solution-btn {
+        font-size: 1rem;
+        padding: 10px 20px;
+    }
+}
+
+</style>
+</head>
+<body>
+    <div class="container">
+        <!-- Heading -->
+        <header class="heading">
+            <h1>Hackathon</h1>
+        </header>
+
+        <!-- Problem Statement -->
+        <section class="problem-statement">
+            <p> Design and Develop and develop a comprehensive Course 
+                Selection and Teacher Assignment System for a university. In this system, 
+                each student must choose 4 theory courses and 2 lab courses per semester, 
+                selecting a teacher for each course from an available pool. The system should 
+                feature a user-friendly interface and a robust database to manage course 
+                selections, teacher assignments, and student preferences. Students will be able 
+                to view detailed teacher profiles, including ratings from the last four years, 
+                research projects, patents, and academic background. The platform should 
+                also allow students to submit feedback on their experience with each teacher. 
+                The goal is to create a seamless and data-driven platform that optimizes 
+                course-teacher matching, enhancing the academic experience by providing 
+                students with the necessary tools to make informed decisions based on 
+                teacher performance and expertise. </p>
+        </section>
+
+        <!-- Solution Button -->
+        <footer class="footer">
+            <a href="dash.html"><button class="solution-btn">Solution</button></a>
+        </footer>
+    </div>
+</body>
+</html>
